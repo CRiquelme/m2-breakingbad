@@ -6,7 +6,7 @@ function Home() {
   const [msg, setMsg] = useState([]);
 
   useEffect(() => {
-    document.title = 'hola'
+    document.title = 'Breaking bad - With React'
     getQuote()
   }, []);
 
@@ -21,7 +21,7 @@ function Home() {
     <div className="Home">
       <img src={logo} alt="" className="Home__logo" />
       {
-      msg.map(item => (
+        msg.map(item => (
           <div key={item.quote_id} className="quote">
             <p>{item.quote}</p>
             <cite>{item.author}</cite>
