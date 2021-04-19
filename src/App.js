@@ -4,7 +4,7 @@ import "./App.css";
 
 import NavBar from './components/navbar/NavBar';
 import Home from './components/home/Home';
-// import Characters from './components/characters/Characters';
+import Characters from './components/characters/Characters';
 import Episodes from './components/episodes/Episodes';
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
-        {/* <Route path="/characters" component={Characters} />
-        <Route path="/characters/:id" component={Characters} /> */}
+        <Route path="/characters" component={Characters} />
+        <Route path="/characters/:id" component={Characters} />
         <Route path="/episodes" component={Episodes} />
       </Switch>
     </div>

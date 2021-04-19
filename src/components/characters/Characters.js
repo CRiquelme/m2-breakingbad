@@ -14,6 +14,30 @@ function Characters() {
     con un nombre o un apellido, y en base a eso la api realizará el filtrado.
     En caso de no poner nada en la query, la api traerá a todos los personajes.
   */
+  
+  const [characters, setCharacters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    searchCharacter()
+  }, []);
+
+  const handleInputChange = function (e) {
+    searchCharacter(e.target.value);
+  }
+
+  const searchCharacter = async (value = '') => {
+    setIsLoading(true);
+    {
+      const data = await fetch(`https://breakingbadapi.com/api/characters?name=${value}`);
+      // const data = await fetch(`https://breakingbadapi.com/api/characters?name=${input.search}`);
+      const character = await data.json();
+      // console.log(character)
+      setCharacters(character);
+      setIsLoading(false);
+    }
+  }
+  
 
   return (
     <div className="Characters">
@@ -23,15 +47,20 @@ function Characters() {
         Aquí vamos a definir el buscador de personajes.
         Debemos crear una SearchBar que contenga un form controlado
       */}
+      <input type="text" name="search" onChange={handleInputChange} autoComplete="off" />
 
       <ul className="Characters__list">
         {/*El loading le va a dar un efecto de carga hasta que la peticion de la API llegue, no tocar!.*/}
         {isLoading ? (
           <Spinner />
         ) : (
-          {
-            /*Aquí vamos a mostrar la lista de personajes.*/
-          }
+            characters.map(character => (
+              <li key={character.char_id}>
+                <Link key={character.char_id} to={`/characters/${character.char_id}`}>
+                  {character.name}
+                </Link>
+              </li>
+            ))
         )}
       </ul>
     </div>
